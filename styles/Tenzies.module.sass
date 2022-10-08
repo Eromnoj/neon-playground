@@ -1,0 +1,49 @@
+.mainTenziesContainer
+  width: 100%
+  height: 100vh
+  display: grid
+  grid-template-rows: 15% 1fr
+
+.tenziesHeader
+  align-self: center
+  justify-self: center
+  text-align: center
+
+.gameContainer
+  display: flex
+  justify-content: center
+  align-items: center
+  .gameBox
+    width: 500px
+    height: 500px
+    border: 1px solid black
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: space-evenly
+    .scores
+      display: flex
+      padding: 10px
+      .currentScore, .bestScore
+        margin: 10px
+    .diceContainer
+      border: 1px solid black
+      width: 80%
+      display: grid
+      grid-template-columns: repeat(5, 1fr)
+      gap: 20px
+      padding: 20px
+      .dice
+        border: 1px solid black
+        width: 50px
+        height: 50px
+        display: flex
+        justify-content: center
+        align-items: center
+      .diceSelected
+        border: 4px solid red
+        width: 50px
+        height: 50px
+        display: flex
+        justify-content: center
+        align-items: center
