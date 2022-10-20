@@ -36,7 +36,7 @@ const Dice = ({id,value,isHeld, heldClick, count}) => {
       const rotationAnim = 900 + (Math.floor(Math.random() * 180))
       gsap.to(diceRef.current, { rotation: `+=${rotationAnim}`, duration: 1 })
     }
-  },[count])
+  },[count,isHeld])
   return (      
     <div className={!isHeld ? styles.dice : styles.diceSelected} onClick={()=>heldClick(id)} ref={diceRef}>{diceFace}</div>
   )
