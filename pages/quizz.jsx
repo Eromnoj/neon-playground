@@ -12,6 +12,10 @@ import styles from '../styles/Quizz.module.sass'
 const Quizz = () => {
 
   const getQuizz = async () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
     const res = await fetch('https://the-trivia-api.com/api/questions?limit=5')
     const data = await res.json()
 
@@ -121,7 +125,7 @@ const Quizz = () => {
     <div className={styles.mainQuizzContainer}>
       <div className={styles.quizzHeader}>
         <h1 className={styles.quizzTitle}>Quizz</h1>
-        <p>Another Trivia Game</p>
+        <p className={styles.quizzSubtitle}>Another Trivia Game</p>
       </div>
 
       <div className={styles.gameContainer}>
@@ -130,12 +134,12 @@ const Quizz = () => {
           <div className={styles.validationBox}>
             {!activeQuizz &&
               <div className={styles.result}>
-                <p className={styles.phrases}>{finalPhrases[score]}</p>
                 <p className={styles.score}>score : {score} / 5 </p>
+                <p className={styles.phrases}>{finalPhrases[score]}</p>
               </div>}
             {activeQuizz ?
-              <button onClick={validAnswer}>Post Answers</button> :
-              <button onClick={getQuizz}>New Quizz</button>}
+              <button className={styles.button} onClick={validAnswer}>Post Answers</button> :
+              <button className={styles.button} onClick={getQuizz}>New Quizz</button>}
           </div>
         </div>
       </div>

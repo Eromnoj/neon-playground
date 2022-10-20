@@ -3,10 +3,14 @@ import { useContext } from 'react'
 import { hundredGameContext } from '../../context/hundred'
 
 const Player = ({ player }) => {
-  const { state, dispatch } = useContext(hundredGameContext)
+  const { state } = useContext(hundredGameContext)
   const playerDisplay = player ? 'Player One' : 'Player Two'
+  const totalScore = player ? state.playerOneTotal : state.playerTwoTotal 
 
-//  if ((!player && state.playerTwoTotal >=100)(player && state.playerOneTotal >=100))
+  const hueColor = Math.ceil(totalScore * 120 / 100)
+  const totalBgColor = {
+  backgroundColor: `hsl(${hueColor},100%, 60%)`
+}
   return (
     <div className={
       (!player && state.playerTwoTotal >=100) || (player && state.playerOneTotal >=100)?
@@ -21,10 +25,10 @@ const Player = ({ player }) => {
         <p className={styles.currentScore}>{player === state.turn ? state.current : '0'}</p>
       </div>
 
-      <div className={styles.totalContainer}>
+      <div className={styles.totalContainer} style={totalBgColor}>
         <p>Total</p>
         <p className={styles.totalScore}>
-          {player ? state.playerOneTotal : state.playerTwoTotal}
+          {totalScore}
         </p>
 
       </div>

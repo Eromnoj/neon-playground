@@ -15,7 +15,7 @@ const Firsttohundred = () => {
 
         <div className={styles.hundredHeader}>
           <h1 className={styles.hundredTitle}>First to Hundred</h1>
-          <p>The competition at its best</p>
+          <p className={styles.hundredSubtitle}>The Wildest Dice Game</p>
         </div>
 
         <div className={styles.gameContainer}>

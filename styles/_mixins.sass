@@ -1,0 +1,9 @@
+@mixin title($color, $spread)
+  color: $color
+  filter: drop-shadow(0px 0px $spread lighten($color, 10%))
+
+@mixin flex($dir, $jc, $ai)
+  display: flex
+  flex-direction: $dir
+  justify-content: $jc
+  align-items: $ai

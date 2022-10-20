@@ -1,12 +1,7 @@
 import styles from '../styles/Tenzies.module.sass'
 import { nanoid } from 'nanoid'
 import { useEffect, useState } from 'react'
-import dynamic from 'next/dynamic'
-
-const Dice = dynamic(() => import('../components/tenzies/Dice'), {
-  ssr: false
-})
-
+import Dice from "../components/tenzies/Dice"
 const Tenzies = () => {
 
   const newGame = () => {
@@ -31,9 +26,7 @@ const Tenzies = () => {
   }
 
   const rollDice = () => {
-
     if (!tenzies) {
-
       setRoll(prev => prev.map(die => !die.isHeld ?
         {
           ...die,
@@ -67,16 +60,19 @@ const Tenzies = () => {
     }
   }, [roll])
 
+  useEffect(()=> {
+    newGame()
+  },[])
 
 
 
-  const displayDice = roll.map(die => <Dice key={die.id} id={die.id} value={die.value} isHeld={die.isHeld} heldClick={heldDice} />)
+  const displayDice = roll.map(die => <Dice key={die.id} id={die.id} value={die.value} isHeld={die.isHeld} heldClick={heldDice} count={count} />)
 
   return (
     <div className={styles.mainTenziesContainer}>
       <div className={styles.tenziesHeader}>
         <h1 className={styles.tenziesTitle}>Tenzies</h1>
-        <p>Another game of Dice</p>
+        <p className={styles.tenziesSubtitle}>Another game of Dice</p>
       </div>
 
       <div className={styles.gameContainer}>
@@ -90,7 +86,8 @@ const Tenzies = () => {
           <div className={styles.diceContainer}>
             {displayDice}
           </div>
-          <button className={styles.rollButton} onClick={rollDice} >{tenzies ? 'NewGame' : 'Roll dice'}</button>
+          {tenzies && <div>You Win !!</div> }
+          <button className={styles.rollButton} onClick={rollDice} >{tenzies ? 'New Game' : 'Roll dice'}</button>
         </div>
 
       </div>

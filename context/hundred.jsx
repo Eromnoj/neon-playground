@@ -5,8 +5,6 @@ import { createContext, useMemo, useReducer } from "react"
 function reducer(state, action) {
   switch (action.type) {
     case 'roll':
-      // state.current = turn === state.turn ? state.current + state.dicevalue : 0
-      // state.turn = turn
       const rollDice = Math.ceil(Math.random() * 6)
       return {
           ...state,
