@@ -34,7 +34,7 @@
     width: 100%
     min-height: 500px
     padding: 20px
-    @include flex(column,center,space-evenly)
+    @include flex(column,space-evenly,center)
    
     .quizzQuestion
 
@@ -52,8 +52,9 @@
         margin: 10px
         .answer
           @include answer($color: variables.$nyanza)
+          cursor: pointer
           &:hover
-            background-color: pink
+            background-color: variables.$sunray
         .correctAnswer
           @include answer($color: lightgreen)
         .wrongAnswer

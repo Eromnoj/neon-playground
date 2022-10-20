@@ -11,43 +11,48 @@ import styles from '../styles/Quizz.module.sass'
 
 const Quizz = () => {
 
+  const [loading, setLoading] = useState(true)
   const getQuizz = async () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
     })
-    const res = await fetch('https://the-trivia-api.com/api/questions?limit=5')
-    const data = await res.json()
-
-    const formattedQuizz = data.map(question => {
-      let correctAnswer = {
-        id: nanoid(),
-        correct: true,
-        isSelected: false,
-        answer: question.correctAnswer
-      }
-
-      let answersArray = question.incorrectAnswers.map(answer => {
-        return {
+    try {
+      const res = await fetch('https://the-trivia-api.com/api/questions?limit=5')
+      const data = await res.json()
+      setLoading(false)
+      const formattedQuizz = data.map(question => {
+        let correctAnswer = {
           id: nanoid(),
-          correct: false,
+          correct: true,
           isSelected: false,
-          answer
+          answer: question.correctAnswer
+        }
+        
+        let answersArray = question.incorrectAnswers.map(answer => {
+          return {
+            id: nanoid(),
+            correct: false,
+            isSelected: false,
+            answer
+          }
+        })
+        
+        let random = Math.floor(Math.random() * 3)
+        answersArray.splice(random, 0, correctAnswer)
+        return {
+          id: question.id,
+          question: question.question,
+          answers: answersArray
         }
       })
-
-      let random = Math.floor(Math.random() * 3)
-      answersArray.splice(random, 0, correctAnswer)
-      return {
-        id: question.id,
-        question: question.question,
-        answers: answersArray
-      }
-    })
-
-    setQuizz(formattedQuizz)
-    setScore(0)
-    setActiveQuizz(true)
+      
+      setQuizz(formattedQuizz)
+      setScore(0)
+      setActiveQuizz(true)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const selectedAnswer = (questionId, answerId) => {
@@ -121,6 +126,9 @@ const Quizz = () => {
     selectedAnswer={selectedAnswer}
     activeQuizz={activeQuizz} />)
 
+    if(loading){
+      return <div>Loading...</div>
+    }
   return (
     <div className={styles.mainQuizzContainer}>
       <div className={styles.quizzHeader}>
