@@ -2,6 +2,7 @@ import styles from '../styles/Tenzies.module.sass'
 import { nanoid } from 'nanoid'
 import { useEffect, useState } from 'react'
 import Dice from "../components/tenzies/Dice"
+import Link from 'next/link'
 const Tenzies = () => {
 
   const newGame = () => {
@@ -60,9 +61,9 @@ const Tenzies = () => {
     }
   }, [roll])
 
-  useEffect(()=> {
+  useEffect(() => {
     newGame()
-  },[])
+  }, [])
 
 
 
@@ -71,9 +72,17 @@ const Tenzies = () => {
   return (
     <div className={styles.mainTenziesContainer}>
       <div className={styles.tenziesHeader}>
+        <div className={styles.homeLink}>
+          <Link href='/'><a href='' className={styles.link}>Back to game selection</a></Link>
+        </div>
         <h1 className={styles.tenziesTitle}>Tenzies</h1>
         <p className={styles.tenziesSubtitle}>Another game of Dice</p>
+        <div className={styles.rules}>
+          You have to have 10 identical values in a minimum of draw. Roll dices, and click on any dice to hold it&apos;s value.
+          Try to beat your personnal record !
+        </div>
       </div>
+
 
       <div className={styles.gameContainer}>
 
@@ -86,7 +95,7 @@ const Tenzies = () => {
           <div className={styles.diceContainer}>
             {displayDice}
           </div>
-          {tenzies && <div>You Win !!</div> }
+          {tenzies && <div>You Win !!</div>}
           <button className={styles.rollButton} onClick={rollDice} >{tenzies ? 'New Game' : 'Roll dice'}</button>
         </div>
 

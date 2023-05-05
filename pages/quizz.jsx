@@ -7,6 +7,7 @@ const Question = dynamic(() => import('../components/quizz/Question'), {
   ssr: false
 })
 import styles from '../styles/Quizz.module.sass'
+import Link from 'next/link'
 
 
 const Quizz = () => {
@@ -132,6 +133,9 @@ const Quizz = () => {
   return (
     <div className={styles.mainQuizzContainer}>
       <div className={styles.quizzHeader}>
+      <div className={styles.homeLink}>
+            <Link href='/'><a href='' className={styles.link}>Back to game selection</a></Link>
+          </div>
         <h1 className={styles.quizzTitle}>Quizz</h1>
         <p className={styles.quizzSubtitle}>Another Trivia Game</p>
       </div>

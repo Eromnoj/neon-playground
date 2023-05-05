@@ -17,12 +17,26 @@
   width: 100%
   height: 100vh
   display: grid
-  grid-template-rows: 15% 1fr
+  grid-template-rows: 25% 1fr
 
 .quizzHeader
-  align-self: center
-  justify-self: center
+  @include flex(column, center, center)
   text-align: center
+  .homeLink
+    @include flex(row, center, center)
+    width: 60%
+    @media screen and (min-width: 700px) 
+      width: 350px
+    background-color: variables.$nyanza
+    padding: 5px
+    border-radius: 15px
+    filter: drop-shadow(0px 0px 5px variables.$nyanza)
+    .link
+      text-align: center
+      width: 100%
+      height: 100%
+      color: variables.$dark-purple
+      text-decoration: none
   .quizzTitle
     @include title(variables.$cinnamon-satin, 10px)
   .quizzSubtitle
