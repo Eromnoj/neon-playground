@@ -26,7 +26,6 @@ function reducer(state, action) {
             current: 0,
             playerTwoTotal: state.playerTwoTotal + state.current
           }
-
     case 'restart':
       return {
         ...initialState

@@ -29,7 +29,7 @@ const Quizz = () => {
           isSelected: false,
           answer: question.correctAnswer
         }
-        
+
         let answersArray = question.incorrectAnswers.map(answer => {
           return {
             id: nanoid(),
@@ -38,7 +38,7 @@ const Quizz = () => {
             answer
           }
         })
-        
+
         let random = Math.floor(Math.random() * 3)
         answersArray.splice(random, 0, correctAnswer)
         return {
@@ -47,7 +47,7 @@ const Quizz = () => {
           answers: answersArray
         }
       })
-      
+
       setQuizz(formattedQuizz)
       setScore(0)
       setActiveQuizz(true)
@@ -57,7 +57,20 @@ const Quizz = () => {
   }
 
   const selectedAnswer = (questionId, answerId) => {
-    setQuizz(prev => prev.map(question => question.id === questionId ? { ...question, answers: question.answers.map(answer => answer.id === answerId ? { ...answer, isSelected: true } : { ...answer, isSelected: false }) } : { ...question }))
+    setQuizz(
+      prev => prev.map(
+        question => question.id === questionId
+          ? {
+            ...question,
+            answers: question.answers.map(
+              answer => answer.id === answerId
+                ? { ...answer, isSelected: true }
+                : { ...answer, isSelected: false }
+            )
+          }
+          : { ...question }
+      )
+    )
   }
 
   // For reference, this is the logic of the code above :
@@ -127,15 +140,15 @@ const Quizz = () => {
     selectedAnswer={selectedAnswer}
     activeQuizz={activeQuizz} />)
 
-    if(loading){
-      return <div>Loading...</div>
-    }
+  if (loading) {
+    return <div>Loading...</div>
+  }
   return (
     <div className={styles.mainQuizzContainer}>
       <div className={styles.quizzHeader}>
-      <div className={styles.homeLink}>
-            <Link href='/'><a href='' className={styles.link}>Back to game selection</a></Link>
-          </div>
+        <div className={styles.homeLink}>
+          <Link href='/'><a href='' className={styles.link}>Back to game selection</a></Link>
+        </div>
         <h1 className={styles.quizzTitle}>Quizz</h1>
         <p className={styles.quizzSubtitle}>Another Trivia Game</p>
       </div>
